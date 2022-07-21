@@ -6,14 +6,14 @@ pipeline{
 		DOCKERHUB_CREDENTIALS=credentials('docker-hub-credentials')
 	}
 
-	// stages {
+	stages {
 
-	// 	stage('Build') {
+		stage('Build') {
 
-	// 		steps {
-	// 			sh 'docker build -t 82xcherodinger/next-container:latest .'
-	// 		}
-	// 	}
+			steps {
+				sh 'docker build -t 82xcherodinger/next-container:latest .'
+			}
+		}
 
 	// 	stage('Login') {
 
