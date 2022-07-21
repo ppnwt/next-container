@@ -14,6 +14,7 @@ pipeline{
 				sh 'docker build -t 82xcherodinger/next-container:latest .'
 			}
 		}
+  }
 
 	// 	stage('Login') {
 
