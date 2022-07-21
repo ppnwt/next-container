@@ -2,12 +2,13 @@ pipeline {
     agent {
         docker { image 'node:16.15.1' }
     }
-    
 
-    stages('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
-
-        checkout scm
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
     }
 
     stages('Build image') {
