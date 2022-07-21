@@ -6,13 +6,6 @@ pipeline {
   }
   agent any
   stages {
-    stage('Build App') {
-      steps{
-        script {
-          sh "npm run build"
-        }
-      }
-    }
     stage('Building our image') {
       steps{
         script {
