@@ -6,11 +6,11 @@ pipeline {
   }
   agent any
   stages {
-    stage('Cloning our Git') {
-      steps {
-        git 'https://github.com/newzpanuwat/next-container.git'
-      }
-    }
+    // stage('Cloning our Git') {
+    //   steps {
+    //     git 'https://github.com/newzpanuwat/next-container.git'
+    //   }
+    // }
     stage('Building our image') {
       steps{
         script {
