@@ -2,21 +2,22 @@ pipeline {
     agent {
         docker { image 'node:16.15.1' }
     }
+    
 
-    stage('Clone repository') {
+    stages('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
         checkout scm
     }
 
-    stage('Build image') {
+    stages('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
         app = docker.build("next-container_next-container")
     }
 
-    stage('Test image') {
+    stages('Test image') {
         /* Ideally, we would run a test framework against our image.
          * For this example, we're using a Volkswagen-type approach ;-) */
 
@@ -25,7 +26,7 @@ pipeline {
         }
     }
 
-    stage('Push image') {
+    stages('Push image') {
         /* Finally, we'll push the image with two tags:
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
