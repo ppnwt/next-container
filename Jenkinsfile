@@ -1,40 +1,36 @@
-pipeline{
-
-	agent any
-
-	environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	}
-
-	stages {
-
-		stage('Build') {
-
-			steps {
-				sh 'docker build -t 82xcherodinger/next-container:latest .'
-			}
-		}
+pipeline {
+  environment {
+    registry = "82xcherodinger/next-container"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
   }
-
-	// 	stage('Login') {
-
-	// 		steps {
-	// 			sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	// 		}
-	// 	}
-
-	// 	stage('Push') {
-
-	// 		steps {
-	// 			sh 'docker push 82xcherodinger/next-container:latest'
-	// 		}
-	// 	}
-	// }
-
-	// post {
-	// 	always {
-	// 		sh 'docker logout'
-	// 	}
-	// }
-
+  agent any
+  stages {
+    stage('Cloning our Git') {
+      steps {
+        git 'https://github.com/newzpanuwat/next-container.git'
+      }
+    }
+    stage('Building our image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy our image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Cleaning up') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
 }
