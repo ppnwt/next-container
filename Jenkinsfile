@@ -1,34 +1,39 @@
-pipeline {
-    agent {
-        docker { image 'node:16.15.1' }
-    }
+pipeline{
 
-    stages {
-      stage('Test') {
-          steps {
-              sh 'node --version'
-          }
-      }
-  }
+	agent any
 
-    // stage('Clone repository') {
-    //     checkout scm
-    // }
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('docker-hub-credentials')
+	}
 
-    // stage('Build image') {
-    //     app = docker.build("next-container_next-container")
-    // }
+	stages {
 
-    // stage('Test image') {
-    //     app.inside {
-    //         sh 'echo "Tests passed"'
-    //     }
-    // }
+		stage('Build') {
 
-    // stage('Push image') {
-    //     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-    //         app.push("${env.BUILD_NUMBER}")
-    //         app.push("latest")
-    //     }
-    // }
+			steps {
+				sh 'docker build -t 82xcherodinger/next-container:latest .'
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				sh 'docker push 82xcherodinger/next-container:latest'
+			}
+		}
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
