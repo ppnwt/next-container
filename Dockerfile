@@ -6,8 +6,8 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --production
+RUN npm install
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]

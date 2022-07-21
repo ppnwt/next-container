@@ -1,11 +1,11 @@
 version: '3'
 
 services:
- next-web:
+ next-container:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: next-web
+    container_name: next-container
     restart: always
     volumes:
       - ./:/app
