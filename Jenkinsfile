@@ -29,7 +29,6 @@ pipeline {
     }
     stage('ssh to server then deploy') {
       steps{
-        sh "chmod +x ./script/deploy"
         sh "./script/deploy.sh"
       }
     }
