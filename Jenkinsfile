@@ -1,16 +1,11 @@
 pipeline {
   environment {
     registry = "82xcherodinger/next-container"
-    registryCredential = 'dockerhub'
+    registryCredential = 'dockerhub-id'
     dockerImage = ''
   }
   agent any
   stages {
-    // stage('Cloning our Git') {
-    //   steps {
-    //     git 'https://github.com/newzpanuwat/next-container.git'
-    //   }
-    // }
     stage('Building our image') {
       steps{
         script {
