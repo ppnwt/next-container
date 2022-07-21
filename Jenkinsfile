@@ -4,37 +4,31 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-            }
-        }
-    }
+      stage('Test') {
+          steps {
+              sh 'node --version'
+          }
+      }
+  }
 
-    stages('Build image') {
-        /* This builds the actual image; synonymous to
-         * docker build on the command line */
+    // stage('Clone repository') {
+    //     checkout scm
+    // }
 
-        app = docker.build("next-container_next-container")
-    }
+    // stage('Build image') {
+    //     app = docker.build("next-container_next-container")
+    // }
 
-    stages('Test image') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
+    // stage('Test image') {
+    //     app.inside {
+    //         sh 'echo "Tests passed"'
+    //     }
+    // }
 
-        app.inside {
-            sh 'echo "Tests passed"'
-        }
-    }
-
-    stages('Push image') {
-        /* Finally, we'll push the image with two tags:
-         * First, the incremental build number from Jenkins
-         * Second, the 'latest' tag.
-         * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-    }
+    // stage('Push image') {
+    //     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+    //         app.push("${env.BUILD_NUMBER}")
+    //         app.push("latest")
+    //     }
+    // }
 }
