@@ -1,5 +1,7 @@
-node {
-    def app
+pipeline {
+    agent {
+        docker { image 'node:16.15.1' }
+    }
 
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
