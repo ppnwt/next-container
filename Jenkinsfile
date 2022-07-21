@@ -29,7 +29,9 @@ pipeline {
     }
     stage('ssh to server then deploy') {
       steps{
-        sh "./script/deploy.sh"
+        sh "ssh root@139.180.141.237"
+        sh "docker pull 82xcherodinger/next-container:$BUILD_NUMBER"
+        sh "docker-compose up -d"
       }
     }
   }
