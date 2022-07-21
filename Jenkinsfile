@@ -6,34 +6,34 @@ pipeline{
 		DOCKERHUB_CREDENTIALS=credentials('docker-hub-credentials')
 	}
 
-	stages {
+	// stages {
 
-		stage('Build') {
+	// 	stage('Build') {
 
-			steps {
-				sh 'docker build -t 82xcherodinger/next-container:latest .'
-			}
-		}
+	// 		steps {
+	// 			sh 'docker build -t 82xcherodinger/next-container:latest .'
+	// 		}
+	// 	}
 
-		stage('Login') {
+	// 	stage('Login') {
 
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
+	// 		steps {
+	// 			sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	// 		}
+	// 	}
 
-		stage('Push') {
+	// 	stage('Push') {
 
-			steps {
-				sh 'docker push 82xcherodinger/next-container:latest'
-			}
-		}
-	}
+	// 		steps {
+	// 			sh 'docker push 82xcherodinger/next-container:latest'
+	// 		}
+	// 	}
+	// }
 
-	post {
-		always {
-			sh 'docker logout'
-		}
-	}
+	// post {
+	// 	always {
+	// 		sh 'docker logout'
+	// 	}
+	// }
 
 }
