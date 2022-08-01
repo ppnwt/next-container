@@ -1,5 +1,3 @@
-// import Home from "../features/Home";
-// import Modal from "../features/Modal";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 
