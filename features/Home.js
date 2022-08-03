@@ -14,7 +14,7 @@ function Home({ onClick }) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to <a href="https://nextjs.org">Next.js! test2</a>
         </h1>
         <h3 className={styles.title}>CI/CD With jenkins & Docker</h3>
         <button onClick={onClick}>Click</button>
