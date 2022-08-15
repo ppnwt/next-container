@@ -4,9 +4,6 @@ start-dev:
 build-next:
 	npm run build
 
-clean:
-	./mvnw clean install
-
 build:
 	docker build -t next-container .
 	make start
