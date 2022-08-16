@@ -13,3 +13,6 @@ start:
 	docker stop next-app
 	docker system prune
 	docker run -p 3001:3000 -t -d --name next-app next-container
+
+clean:
+	docker system prune -f
