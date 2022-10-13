@@ -1,13 +1,13 @@
 version: '3'
 
 services:
- next-container:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: next-container
-    restart: always
-    volumes:
-      - ./:/app
-    ports:
-      - "3000:3000"
+next-container:
+  build:
+    context: .
+    dockerfile: Dockerfile
+  container_name: next-container
+  restart: always
+  volumes:
+    - ./:/app
+  ports:
+    - "3000:3000"

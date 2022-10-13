@@ -13,12 +13,12 @@
 # CMD ["npm", "run", "start"]
 
 
-FROM node:16 as dependencies
+FROM node:16-alpine as dependencies
 WORKDIR /next-container
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-FROM node:16 as builder
+FROM node:16-alpine as builder
 WORKDIR /next-container
 COPY . .
 COPY --from=dependencies /next-container/node_modules ./node_modules
