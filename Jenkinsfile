@@ -27,10 +27,10 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-    stage('ssh to server then deploy') {
-      steps{
-        sh "./script/deploy.sh"
-      }
-    }
+    // stage('ssh to server then deploy') {
+    //   steps{
+    //     sh "./script/deploy.sh"
+    //   }
+    // }
   }
 }
